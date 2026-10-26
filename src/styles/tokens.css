@@ -1,0 +1,55 @@
+/* Basera Estates palette and spacing, with the site's updated editorial type pairing. */
+:root, [data-theme="site"] {
+  --plan-mist: #eef2f0;
+  --white: #ffffff;
+  --ink: #13201b;
+  --stone: #5b6661;
+  --brand-emerald: #1d5c47;
+  --brand-emerald-press: #174a39;
+  --emerald-tint: #dce7e2;
+  --deep-emerald: #0e2a21;
+  --on-dark-muted: #a9bdb4;
+  --dark-hairline: #2f4a40;
+  --ochre: #d4a12a;
+  --ochre-strong: #8f6a14;
+  --hairline: #d3dcd8;
+  --field-line: #7d8a84;
+  --danger: #a1312b;
+  --hero-scrim: rgba(14, 42, 33, 0.92);
+  --focus-light: var(--brand-emerald);
+  --focus-dark: var(--ochre);
+  --shadow-float: 0 8px 24px rgba(14, 42, 33, 0.18);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --gutter-mobile: 20px;
+  --gutter-desktop: 48px;
+  --section-mobile: 72px;
+  --section-desktop: 128px;
+  --content-max: 1200px;
+  --touch-min: 44px;
+  --radius-crisp: 2px;
+  --radius-group: 12px;
+  --radius-round: 999px;
+  --font-display: var(--font-newsreader, "Newsreader"), Georgia, serif;
+  --font-sans: var(--font-dm-sans, "DM Sans"), system-ui, sans-serif;
+  --font-voice: var(--font-newsreader, "Newsreader"), Georgia, serif;
+}
+.hero-name { font-family: var(--font-display); font-size: 104px; line-height: 0.98; font-weight: 500; letter-spacing: -0.035em; }
+.section-heading { font-family: var(--font-display); font-size: 52px; line-height: 1.07; font-weight: 500; letter-spacing: -0.025em; }
+.section-heading-mobile { font-family: var(--font-display); font-size: 34px; line-height: 1.12; font-weight: 500; letter-spacing: -0.025em; }
+.stat-number { font-family: var(--font-sans); font-size: 60px; line-height: 1; font-weight: 600; letter-spacing: -0.025em; }
+.card-title { font-family: var(--font-sans); font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.015em; }
+.wordmark { font-family: var(--font-sans); font-size: 20px; line-height: 1; font-weight: 700; letter-spacing: -0.025em; }
+.body-lg { font-family: var(--font-sans); font-size: 18px; line-height: 1.6; font-weight: 400; }
+.body { font-family: var(--font-sans); font-size: 16px; line-height: 1.6; font-weight: 400; }
+.small { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; font-weight: 400; }
+.button { font-family: var(--font-sans); font-size: 16px; line-height: 1.2; font-weight: 600; }
+.quote-lg { font-family: var(--font-voice); font-size: 30px; line-height: 1.35; font-weight: 400; font-style: italic; }
+.quote { font-family: var(--font-voice); font-size: 20px; line-height: 1.45; font-weight: 400; font-style: italic; }

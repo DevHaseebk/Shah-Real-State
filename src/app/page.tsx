@@ -1,69 +1,49 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Suspense } from "react";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { AreasSection } from "@/components/sections/AreasSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { FounderSpotlight } from "@/components/sections/FounderSpotlight";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { MobileActionBar } from "@/components/sections/MobileActionBar";
+import { Navbar } from "@/components/sections/Navbar";
+import { OverseasBand } from "@/components/sections/OverseasBand";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { SiteFooter } from "@/components/sections/SiteFooter";
+import { StatsBand } from "@/components/sections/StatsBand";
+import { TeamSection } from "@/components/sections/TeamSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { site } from "@/content/site";
 
 export default function Home() {
+  const { name, whatsapp, phoneLocal, phoneHref, nav, faq } = site;
+  const contact = { name, whatsapp, phoneLocal, phoneHref };
+  /* .bs-site is the size container that drives the 768px and 1024px layouts. Each section has its own
+     Suspense boundary so React hydrates it as a separate task, not the whole page in one long one. This
+     measured better on Lighthouse (TBT about 400ms against 700 to 900) even though React then reveals
+     the boundaries with a script. The page is prerendered, so no fallback ever shows. */
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="bs-site">
+      <div className="bs-page">
+        <Suspense><Navbar data={{ ...contact, nav }} /></Suspense>
+        <main>
+          <Suspense><HeroSection data={site} /></Suspense>
+          <Suspense><StatsBand data={site} /></Suspense>
+          <Suspense><AboutSection data={site} /></Suspense>
+          <Suspense><ServicesSection data={site} /></Suspense>
+          <Suspense><AreasSection data={site} /></Suspense>
+          <Suspense><FounderSpotlight data={site} /></Suspense>
+          {site.team.length > 0 && <Suspense><TeamSection data={site} /></Suspense>}
+          <Suspense><ProcessSection data={site} /></Suspense>
+          <Suspense><OverseasBand data={site} /></Suspense>
+          <Suspense><TestimonialsSection data={site} /></Suspense>
+          <Suspense><FaqSection data={{ faq }} /></Suspense>
+          <Suspense><ContactSection data={site} /></Suspense>
+        </main>
+        <Suspense><SiteFooter data={site} /></Suspense>
+        <Suspense><MobileActionBar data={contact} /></Suspense>
+      </div>
     </div>
   );
 }
