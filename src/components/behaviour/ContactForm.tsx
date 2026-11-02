@@ -2,6 +2,7 @@
 
 import { type FormEvent, useId, useRef, useState } from "react";
 import { Button } from "../ui/Button";
+import { AdaptiveSelect } from "../ui/AdaptiveSelect";
 
 type Errors = { name?: string; phone?: string };
 
@@ -67,11 +68,7 @@ export function ContactForm({ name: agency, whatsapp, intents, areas }: {
       </fieldset>
       <div className="bs-field bs-field--full">
         <label htmlFor={`${id}-a`}>Area</label>
-        <select className="bs-input" id={`${id}-a`} name="area" defaultValue="">
-          <option value="">Choose an area</option>
-          {areas.map((a) => <option key={a}>{a}</option>)}
-          <option>Somewhere else</option>
-        </select>
+        <AdaptiveSelect id={`${id}-a`} label="Area" name="area" options={[{value:"",label:"Choose an area"},...areas.map(a => ({value:a,label:a})),{value:"Somewhere else",label:"Somewhere else"}]} />
       </div>
       <div className="bs-field bs-field--full">
         <label htmlFor={`${id}-m`}>Message</label>

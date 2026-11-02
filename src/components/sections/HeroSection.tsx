@@ -93,10 +93,10 @@ export function HeroSection({ data: d }: { data: SiteData }) {
             <WaButton data={d} />
             <CallButton data={d} />
           </div>
-          <p className="bs-hero__trust bs-hero__fade">
+          {d.rating.count > 0 && d.rating.score && <p className="bs-hero__trust bs-hero__fade">
             <Icon name="star" />
             <span>Rated {d.rating.score} by {d.rating.count} clients</span>
-          </p>
+          </p>}
           <div className="bs-intent bs-hero__fade" role="group" aria-label="I want to">
             <span className="bs-intent__label">I want to:</span>
             <div className="bs-intent__chips">

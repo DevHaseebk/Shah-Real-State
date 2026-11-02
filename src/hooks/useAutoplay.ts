@@ -23,13 +23,15 @@ export function useAutoplay(listRef: RefObject<HTMLElement | null>, boxRef: RefO
     box.addEventListener("touchstart", pause, { passive: true, signal });
     box.addEventListener("touchend", () => resume(8000), { passive: true, signal });
     box.addEventListener("focusin", pause, { signal });
-    box.addEventListener("focusout", () => resume(1500), { signal });
+    box.addEventListener("focusout", (e) => {
+      if (!box.contains(e.relatedTarget as Node | null)) resume(1500);
+    }, { signal });
 
     const io = new IntersectionObserver(([e]) => { inView = e.intersectionRatio >= 0.4; }, { threshold: [0, 0.4, 0.8] });
     io.observe(rv);
 
     const iv = window.setInterval(() => {
-      if (paused || !inView || reducedMotion() || document.hidden || rv.scrollWidth <= rv.clientWidth + 2) return;
+      if (paused || box.contains(document.activeElement) || !inView || reducedMotion() || document.hidden || rv.scrollWidth <= rv.clientWidth + 2) return;
       if (rv.scrollLeft >= rv.scrollWidth - rv.clientWidth - 4) rv.scrollTo({ left: 0, behavior: "smooth" });
       else stepBy(rv, 1);
     }, 6000);

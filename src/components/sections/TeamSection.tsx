@@ -23,8 +23,8 @@ export function TeamSection({ data: d }: { data: SiteData }) {
                     {m.langs}
                   </p>
                 </div>
-                {/* Every advisor shares the agency number for now; the message names who to pass it to. */}
-                <a className="bs-iconbtn bs-iconbtn--wa" href={waHref(d, `${hi(d)}I’d like to speak to ${m.name}.`)} {...EXT} aria-label={`WhatsApp ${m.name}`}>
+                {/* Their own number when they have one; otherwise the agency's, and the message names them. */}
+                <a className="bs-iconbtn bs-iconbtn--wa" href={waHref({ whatsapp: m.whatsapp ?? d.whatsapp }, `${hi(d)}I’d like to speak to ${m.name}.`)} {...EXT} aria-label={`WhatsApp ${m.name}`}>
                   <Icon name="chat" />
                 </a>
               </div>

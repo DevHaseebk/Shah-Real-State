@@ -1,6 +1,6 @@
 import type { SiteData } from "@/content/types";
 
-/** Every phone and WhatsApp form of one Pakistani mobile number, from "0305 3568625" or "+92 305 3568625". */
+/** Every phone and WhatsApp form of one Pakistani mobile number, from "0332 2366516" or "+92 332 2366516". */
 export function contactNumbers(mobile: string): Pick<SiteData, "phone" | "phoneLocal" | "phoneHref" | "whatsapp"> {
   const n = mobile.replace(/\D/g, "").replace(/^(92|0)/, ""); // 3053568625
   return {

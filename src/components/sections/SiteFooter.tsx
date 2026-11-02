@@ -9,8 +9,16 @@ export function SiteFooter({ data: d }: { data: SiteData }) {
       <div className="bs-wrap">
         <div className="bs-footer__grid">
           <div className="bs-footer__brand">
-            <a className="bs-wordmark" href="#top" data-long={d.name.length > 18 ? "" : undefined}>{d.name}</a>
-            <p>Property advisors in {d.city} since {d.since}. Every document checked before you pay a token.</p>
+            {/* A plain link: the navbar scrolls hash links on the home page. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a className="bs-wordmark bs-wordmark--footer" href="/#top" data-long={d.name.length > 18 ? "" : undefined}>
+              <span className="bs-logo-mark" aria-hidden="true">
+                {/* eslint-disable-next-line @next/next/no-img-element -- original client logo */}
+                <img src="/brand/shah-real-estate-logo.png" alt="" />
+              </span>
+              <span>{d.name}</span>
+            </a>
+            <p>Residential and commercial property services in {d.city} since {d.since}.</p>
             <div className="bs-social">
               {d.socials.map((s) => (
                 <a key={s.name} href={s.href} {...EXT}><Icon name="link" /><span>{s.name}</span></a>
@@ -39,7 +47,7 @@ export function SiteFooter({ data: d }: { data: SiteData }) {
             </ul>
           </div>
         </div>
-        <p className="bs-footer__base">© 2026 {d.name}. All rights reserved.</p>
+        <div className="bs-footer__base"><p>© 2026 {d.name}. All rights reserved.</p><p className="bs-developer-credit">Built by <a href="https://haseeb-portfolio-lemon.vercel.app/" target="_blank" rel="noopener noreferrer">Muhammad Haseeb <span aria-hidden="true">↗</span></a></p></div>
       </div>
     </footer>
   );

@@ -1,53 +1,46 @@
 import { contactNumbers } from "@/lib/contact";
 import type { SiteData } from "./types";
 
-/* All site content lives here. Real data replaces the demo copy field by field.
-   Confirmed by the client: name, mobile number, address, map link, Facebook page, founder's first name.
-   Still demo copy from the design: hours, since, rating, stats, about, founder story, quote and
-   credentials, testimonials. Replace these before launch; the quote and reviews must be real. */
+/* Fallback content when the API is not configured. Agency facts come from the supplied company document. */
 
-const address = "B 97, Block 13-D-2, Gulshan-e-Iqbal, Karachi 75300";
+const address = "Shop No. 3, Mirza Square, Plot No. B-97, Block 13/D-2, Furniture Market, Gulshan-e-Iqbal, Karachi";
 
 export const site: SiteData = {
   name: "Shah Real Estate",
   city: "Karachi",
-  since: 2011,
+  since: 2008,
   /* The only place the number is written. Every call and WhatsApp link derives from it. */
-  ...contactNumbers("0305 3568625"),
+  ...contactNumbers("0332 2366516"),
   address,
-  hours: "Mon–Sat, 11am–8pm",
+  email: "shahestate1976@gmail.com",
+  hours: "Contact us for office hours",
   mapUrl: "https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=pk&sa=X&geocode=KW1xTaksP7M-MdX9wWSmxiin&daddr=B+97,+Block+13D-2+Block+13+D+2+Gulshan-e-Iqbal,+Karachi,+75300",
-  rating: { score: "4.8", count: 320 },
+  rating: { score: "", count: 0 },
   heroLine:
-    "Property advisors in Karachi since 2011. Buying, selling and investing, with every document checked before you pay a token.",
+    "Your trusted property partner in Gulshan-e-Iqbal, Karachi since 2008. Buy, sell or rent residential and commercial property with local guidance.",
   intents: [
     { label: "Buy", msg: "I want to buy a property in Karachi." },
     { label: "Sell", msg: "I want to sell a property in Karachi." },
     { label: "Rent", msg: "I want to rent a property in Karachi." },
     { label: "Invest", msg: "I want to invest in property in Karachi." },
   ],
-  stats: [
-    { value: 1450, suffix: "+", label: "properties sold" },
-    { value: 3200, suffix: "+", label: "families served" },
-    { value: 15, label: "years in Karachi" },
-    { prefix: "PKR", value: 20, suffix: " Bn+", label: "in closed deals" },
-  ],
+  stats: [],
   about: {
-    heading: "Fifteen years of careful deals",
-    text: "Shah Real Estate is a Karachi agency. Since 2011 we have helped families, investors and overseas Pakistanis buy, sell and rent across the city’s main societies. We stay small enough that the founder still reads every file.",
+    heading: "Property guidance in Karachi since 2008",
+    text: "Based in Gulshan-e-Iqbal, Shah Real Estate helps clients buy, sell and rent residential and commercial properties. We work with apartments, houses, portions, shops and offices, and assist with sale deeds, KDA mutation and other property documentation. Our team helps clients find options that match their needs and budget.",
     commitments: [
-      "Documents verified before any token",
-      "One advisor from first call to transfer",
-      "Commission agreed in writing upfront",
+      "Residential and commercial sales and rentals",
+      "Sale deed and KDA mutation assistance",
+      "Property guidance based on your needs and budget",
     ],
   },
   services: [
-    { icon: "home", name: "Buy a home", line: "Shortlists that fit your budget, verified before you visit." },
-    { icon: "tag", name: "Sell your property", line: "Valuation, buyer network, professional photos." },
-    { icon: "key", name: "Rentals", line: "Tenant search, police verification, rent agreements." },
-    { icon: "plot", name: "Plots on installments", line: "Booking support for approved societies with clear payment plans." },
-    { icon: "doc", name: "Documentation and transfer", line: "Title checks, NOCs, dues clearance, society or KDA transfer." },
-    { icon: "globe", name: "Overseas Pakistanis", line: "Video visits, document review, transfer through POA." },
+    { icon: "home", name: "Apartments and houses", line: "Find flats, houses and portions for sale or rent." },
+    { icon: "tag", name: "Sell your property", line: "Talk to our team about selling residential or commercial property." },
+    { icon: "key", name: "Rental properties", line: "Explore rental homes, shops and office spaces." },
+    { icon: "plot", name: "Commercial spaces", line: "Ask about shops, showrooms and offices." },
+    { icon: "doc", name: "Property documentation", line: "Assistance with sale deeds, KDA mutation and related paperwork." },
+    { icon: "chat", name: "Property consultancy", line: "Discuss your requirements and budget with our team." },
   ],
   areas: [
     { name: "DHA", line: "Bungalows and plots, Phases 6–8", scene: "villa", size: "big", note: "DHA bungalow, white stone facade, flat roof, steel gate, palms, golden hour", src: "/photos/area-dha.webp" },
@@ -60,21 +53,20 @@ export const site: SiteData = {
     { name: "PECHS", line: "Central homes and commercial floors", scene: "apartments2", note: "PECHS corner building, homes above, offices below", src: "/photos/area-pechs.webp" },
   ],
   founder: {
-    name: "Umer",
-    first: "Umer",
-    role: "Founder & CEO",
-    quote: "I would rather lose a deal than let a family buy a property with a doubtful file.",
+    name: "Abdul Latif",
+    first: "Abdul",
+    role: "Founder, Shah Real Estate",
+    quote: "",
     story:
-      "Fifteen years in banking taught Umer how families think about money. In 2011 he started Shah Real Estate with one rule: every document gets checked before any token changes hands. He still visits every site himself.",
-    credentials: ["15 years in real estate", "600+ deals handled personally", "DHA Karachi registered estate agent"],
-    note: "Portrait of Umer, 4:5, dark suit, office or site background, natural light",
+      "Abdul Latif founded Shah Real Estate. The agency has served clients from Gulshan-e-Iqbal, Karachi since 2008, helping them with property purchases, sales, rentals and documentation.",
+    credentials: [],
   },
   team: [],
   process: [
     { title: "Tell us what you need", line: "Budget, area and purpose, on WhatsApp." },
-    { title: "Shortlist and site visits", line: "Verified options only, with video tours for overseas clients." },
-    { title: "Document check and negotiation", line: "Title, NOC and dues checked, and a fair price agreed." },
-    { title: "Token to transfer", line: "Agreement, payment schedule, transfer and keys." },
+    { title: "Explore options", line: "Discuss available homes or commercial spaces that fit your requirements." },
+    { title: "Ask about documents", line: "Get guidance on sale deeds, KDA mutation and other property paperwork." },
+    { title: "Discuss the next step", line: "Our team will explain the process for the property you choose." },
   ],
   overseas: {
     heading: "Buying from abroad?",
@@ -84,21 +76,18 @@ export const site: SiteData = {
       { icon: "sign", text: "Transfer completed through your POA" },
     ],
   },
-  testimonials: [
-    { name: "Farhan Malik", ctx: "Bought a 240 sq yd house in Gulshan-e-Iqbal", text: "We were nervous about fake documents. Ayesha had every paper verified before we paid the token." },
-    { name: "Imran Ahmed", ctx: "Bought a 125 sq yd plot in DHA City from Dubai", text: "I bought without flying back. Video visits, scanned papers on WhatsApp, and Sana handled the transfer through my POA." },
-    { name: "Nadia Hussain", ctx: "Sold a 500 sq yd bungalow in PECHS", text: "Five weeks from first call to sale, at the price our family had agreed on." },
-    { name: "Asif Mehmood", ctx: "Investor in Bahria Town Karachi", text: "Umer Bhai told us to wait three months before buying. It cost him a quick deal and saved us money." },
-    { name: "Saima Tariq", ctx: "Landlord in Clifton", text: "Tenant found, police verification and rent agreement done within a week." },
-  ],
+  testimonials: [],
   faq: [
-    { q: "Which documents should I check before paying a token?", a: "The title documents and chain of ownership, the seller’s CNIC against the record, the society or KDA NOC for sale, a clear dues record and the approved building plan. We check each one with the issuing office before you pay anything." },
-    { q: "How much commission do you charge?", a: "It depends on the deal type and is agreed in writing before we start. Nothing is added at transfer that was not in that agreement." },
-    { q: "Can I buy while living abroad?", a: "Yes. We run live video visits in your time zone, scan and explain every document on WhatsApp, and complete the transfer through a power of attorney you sign abroad." },
-    { q: "How long does a transfer take in DHA or Bahria Town?", a: "Once documents and dues are clear, most transfers complete within one to two weeks. You get the exact steps and dates at the token stage." },
-    { q: "Do you verify tenants for rentals?", a: "Every tenant goes through police verification, a CNIC and employment check, and a written rent agreement before keys are handed over." },
+    { q: "What kinds of properties can you help with?", a: "We assist with apartments, houses, portions, shops, showrooms and office spaces for sale or rent." },
+    { q: "Can you help with property documents?", a: "Yes. Our services include assistance with sale deeds, KDA mutation and other property-related documentation." },
+    { q: "Where is your office?", a: `Visit us at ${address}. Contact us before your visit to confirm office hours.` },
   ],
-  socials: [{ name: "Facebook", href: "https://www.facebook.com/shahrealestategulshan/" }],
+  socials: [
+    { name: "Facebook", href: "https://www.facebook.com/shah.real.902/" },
+    { name: "Instagram", href: "https://www.instagram.com/shahrealestate2007/" },
+    { name: "YouTube", href: "https://www.youtube.com/@SHAHREALESTATEGULSHAN" },
+    { name: "TikTok", href: "https://www.tiktok.com/@shahrealestate11" },
+  ],
   /* Demo photos from Unsplash (free licence, see PHOTO-CREDITS.md) until the agency's own arrive.
      The founder keeps a labelled stand-in: a stranger's face must not stand in for a real person. */
   photos: {
@@ -122,7 +111,6 @@ export const site: SiteData = {
     { label: "Services", href: "#services" },
     { label: "Areas", href: "#areas" },
     { label: "Founder", href: "#founder" },
-    { label: "Reviews", href: "#reviews" },
     { label: "Contact", href: "#contact" },
   ],
 };

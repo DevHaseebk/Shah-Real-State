@@ -1,5 +1,5 @@
 import type { SiteData } from "@/content/types";
-import { EXT, hi, waHref } from "@/lib/contact";
+import { EXT } from "@/lib/contact";
 import { ContactForm } from "../behaviour/ContactForm";
 import { Icon } from "../ui/Icon";
 
@@ -31,10 +31,6 @@ export function ContactSection({ data: d }: { data: SiteData }) {
                 <span className="bs-map-link__action">Get directions in Google Maps</span>
               </span>
             </a>
-            <p className="bs-hiring">
-              We’re hiring property consultants.{" "}
-              <a href={waHref(d, `${hi(d)}I’d like to apply as a property consultant. I’ll send my CV here.`)} {...EXT}>Send your CV on WhatsApp.</a>
-            </p>
           </div>
         </div>
       </div>

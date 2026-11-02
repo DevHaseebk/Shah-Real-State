@@ -7,22 +7,29 @@ import { usePastHero } from "@/hooks/usePastHero";
 import { CallButton, type Contact, WaButton } from "../ui/Button";
 import { Icon } from "../ui/Icon";
 
-type NavbarProps = { data: Contact & Pick<SiteData, "nav"> };
+type NavbarProps = { data: Contact & Pick<SiteData, "nav">; /** Pages without a hero start with the solid bar. */ solid?: boolean };
 
 function Wordmark({ name }: { name: string }) {
   return (
-    <a className="bs-wordmark" href="#top" data-long={name.length > 18 ? "" : undefined}>
-      {name}
+    // A plain link: on the home page the click handler below scrolls to the top smoothly.
+    // eslint-disable-next-line @next/next/no-html-link-for-pages
+    <a className="bs-wordmark" href="/#top" data-long={name.length > 18 ? "" : undefined}>
+      <span className="bs-logo-mark" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element -- original client logo */}
+        <img src="/brand/shah-real-estate-logo.png" alt="" />
+      </span>
+      <span>{name}</span>
     </a>
   );
 }
 
 /**
  * Fixed top bar: transparent over the hero, solid plan-mist once the hero has scrolled past. Phones get
- * a full-screen menu sheet with a focus trap. Also owns smooth scrolling for every #anchor link on the page.
+ * a full-screen menu sheet with a focus trap. Also owns smooth scrolling for #anchor and /#anchor links on the
+ * home page; from other pages those links simply navigate.
  */
-export function Navbar({ data }: NavbarProps) {
-  const past = usePastHero();
+export function Navbar({ data, solid }: NavbarProps) {
+  const past = usePastHero() || Boolean(solid);
   const [open, setOpen] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -33,12 +40,13 @@ export function Navbar({ data }: NavbarProps) {
   useLayoutEffect(() => { document.documentElement.classList.add("bs-js"); }, []);
 
   useEffect(() => {
+    const previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = open ? "hidden" : "";
     if (open) {
       opened.current = true;
       lastFocus.current = document.activeElement as HTMLElement | null;
       const t = setTimeout(() => closeRef.current?.focus({ preventScroll: true }), 40);
-      return () => clearTimeout(t);
+      return () => { clearTimeout(t); document.documentElement.style.overflow = previousOverflow; };
     }
     if (opened.current) lastFocus.current?.focus({ preventScroll: true });
   }, [open]);
@@ -61,14 +69,15 @@ export function Navbar({ data }: NavbarProps) {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as Element).closest?.<HTMLAnchorElement>('.bs-site a[href^="#"]');
+      const a = (e.target as Element).closest?.<HTMLAnchorElement>('.bs-site a[href^="#"], .bs-site a[href^="/#"]');
       if (!a) return;
+      const href = a.getAttribute("href")!.replace(/^\//, "");
+      const target = href.length > 1 ? document.querySelector(href) : null;
+      if (!target) { setOpen(false); return; } // another page: let the link navigate
       e.preventDefault();
-      const href = a.getAttribute("href")!;
-      if (href.length < 2) return;
       setOpen(false);
       document.documentElement.style.overflow = "";
-      document.querySelector(href)?.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth" });
+      target.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth" });
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

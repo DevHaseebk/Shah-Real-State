@@ -6,7 +6,7 @@ export function ProcessSection({ data: d }: { data: SiteData }) {
   return (
     <section className="bs-section" id="process" aria-labelledby="bs-proc-h" style={d.team.length ? { paddingTop: 0 } : undefined}>
       <div className="bs-wrap bs-process__grid">
-        <div className="bs-head bs-process__head"><h2 className="bs-h2" id="bs-proc-h">From first message to keys</h2></div>
+        <div className="bs-head bs-process__head"><h2 className="bs-h2" id="bs-proc-h">How we help you get started</h2></div>
         <ProcessSteps>
           {d.process.map((s, i) => (
             <li key={s.title} className="bs-step">
