@@ -492,8 +492,8 @@
 
 /* Contact */
 .bs-contact__grid { display: grid; gap: 40px; }
-.bs-form { background: var(--_white); border-radius: var(--_rg); padding: 20px; display: grid; gap: 18px; }
-.bs-field { display: grid; gap: 6px; }
+.bs-form { background: var(--_white); border-radius: var(--_rg); padding: 20px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; min-width: 0; }
+.bs-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; min-width: 0; }
 .bs-field > label, .bs-fieldset legend { font-size: 15px; font-weight: 600; line-height: 1.3; }
 .bs-input { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid var(--_field); border-radius: var(--_r); background: var(--_white); color: var(--_ink); font: inherit; font-size: 16px; line-height: 1.4; }
 textarea.bs-input { min-height: 112px; resize: vertical; }
@@ -635,6 +635,24 @@ select.bs-input { appearance: none; background-image: linear-gradient(45deg, tra
 .bs-props-more { display: flex; justify-content: center; margin-top: 36px; }
 .bs-props-slider { grid-auto-columns: 100%; gap: 16px; margin: 0; padding: 8px 0; scroll-padding-inline: 0; }
 .bs-props-slider > li { min-width: 0; }
+.bs-props-loading__cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.bs-props-loading__cards > :not(:first-child) { display: none; }
+.bs-prop-skeleton__shine, .bs-prop-skeleton__line { background: linear-gradient(90deg, var(--_tint) 20%, #e8efeb 45%, var(--_tint) 70%); background-size: 200% 100%; animation: bs-shimmer 1.4s linear infinite; }
+.bs-prop-skeleton__line { display: block; height: 16px; border-radius: var(--_r); }
+.bs-prop-skeleton__line--price { width: 48%; height: 24px; margin-bottom: 8px; }
+.bs-prop-skeleton__line--title { width: 84%; }
+.bs-prop-skeleton__line--where { width: 62%; }
+.bs-prop-skeleton__line--facts { width: 72%; margin-top: 12px; }
+.bs-catalogue-loading__filters { display: flex; gap: 12px; flex-wrap: wrap; padding: 20px; margin-bottom: 24px; background: var(--_white); border: 1px solid var(--_hair); border-radius: var(--_rg); }
+.bs-catalogue-loading__filters .bs-prop-skeleton__line { width: min(100%, 180px); height: 36px; }
+@container site (min-width: 768px) {
+  .bs-props-loading__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .bs-props-loading__cards > :nth-child(2) { display: flex; }
+}
+@container site (min-width: 1024px) {
+  .bs-props-loading__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .bs-props-loading__cards > :nth-child(3) { display: flex; }
+}
 .bs-slider-controls, .bs-slider-buttons { display: flex; align-items: center; gap: 10px; }
 .bs-slider-controls { justify-content: space-between; margin-top: 18px; font-size: 14px; }
 .bs-slider-button { min-width: 44px; min-height: 44px; padding: 0 14px; border: 1px solid var(--_hair); border-radius: var(--_r); background: var(--_white); color: var(--_em); font: inherit; font-weight: 600; cursor: pointer; }
@@ -657,12 +675,12 @@ select.bs-input { appearance: none; background-image: linear-gradient(45deg, tra
 
 /* Investment enquiry beneath the property preview and catalogue. */
 .bs-invest { background: var(--_tint); }
-.bs-invest__grid { display: grid; gap: 32px; align-items: start; }
-.bs-invest__intro { display: grid; gap: 16px; }
+.bs-invest__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+.bs-invest__intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
 .bs-invest__intro > .bs-muted { max-width: 45ch; }
 .bs-invest__eyebrow { color: var(--_em); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .bs-invest__note { max-width: 46ch; padding-top: 12px; border-top: 1px solid var(--_hair); color: var(--_stone); font-size: 14px; }
-.bs-invest__form { border: 1px solid var(--_hair); box-shadow: 0 18px 50px rgba(14, 42, 33, .07); }
+.bs-invest__form { border: 1px solid var(--_hair); box-shadow: 0 18px 50px rgba(14, 42, 33, .07); min-width: 0; }
 @container site (min-width: 1024px) {
   .bs-invest__grid { grid-template-columns: repeat(12, 1fr); gap: 24px; }
   .bs-invest__intro { grid-column: 1 / span 4; position: sticky; top: 104px; }

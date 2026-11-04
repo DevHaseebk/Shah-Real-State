@@ -105,8 +105,6 @@ export function navFor(show: { founder: boolean; team: boolean; reviews: boolean
 }
 
 export async function getSiteData(): Promise<SiteData> {
-  // A configured API may be asleep or unavailable during deployment builds.
-  if (API_URL) await connection();
   return getSiteDataCached();
 }
 
@@ -177,7 +175,6 @@ export async function getPropertySlugs(): Promise<string[]> {
 }
 
 export async function getMeta(): Promise<PropertyMeta | null> {
-  if (API_URL) await connection();
   return getMetaCached();
 }
 

@@ -5,6 +5,7 @@ import { PageShell } from "@/components/sections/PageShell";
 import { InvestmentPlanSection } from "@/components/sections/InvestmentPlanSection";
 import { Button } from "@/components/ui/Button";
 import { PropertyCard } from "@/components/ui/PropertyCard";
+import { PropertyCardSkeleton } from "@/components/sections/PropertiesSection";
 import { getMeta, getProperties, getSiteData, hasApi, type ListQuery } from "@/lib/api";
 import { hi, waHref } from "@/lib/contact";
 
@@ -30,13 +31,29 @@ async function PropertiesContent({ searchParams }: Pick<PageProps<"/properties">
         <div className="bs-wrap">
           <div className="bs-head"><h1 className="bs-h2" id="bs-list-h">Properties in {site.city}</h1></div>
           {/* The filters and results depend on the address, so they render per request; the rest is static. */}
-          <Suspense fallback={<div className="bs-skeleton" aria-label="Loading properties" />}>
+          <Suspense fallback={<CatalogueSkeleton />}>
             {searchParams.then((sp) => <Results sp={sp} />)}
           </Suspense>
         </div>
       </section>
       <InvestmentPlanSection site={site} />
     </PageShell>
+  );
+}
+
+function CatalogueSkeleton() {
+  return (
+    <div className="bs-catalogue-loading" role="status" aria-busy="true">
+      <span className="bs-sr">Loading properties…</span>
+      <div className="bs-catalogue-loading__filters" aria-hidden="true">
+        <span className="bs-prop-skeleton__line" />
+        <span className="bs-prop-skeleton__line" />
+        <span className="bs-prop-skeleton__line" />
+      </div>
+      <div className="bs-props-loading__cards" aria-hidden="true">
+        {[0, 1, 2].map((item) => <PropertyCardSkeleton key={item} />)}
+      </div>
+    </div>
   );
 }
 

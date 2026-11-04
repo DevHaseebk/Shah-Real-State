@@ -9,32 +9,33 @@ import { InvestmentPlanSection } from "@/components/sections/InvestmentPlanSecti
 import { MobileActionBar } from "@/components/sections/MobileActionBar";
 import { Navbar } from "@/components/sections/Navbar";
 import { ProcessSection } from "@/components/sections/ProcessSection";
-import { PropertiesSection } from "@/components/sections/PropertiesSection";
+import { PropertiesSection, PropertiesSkeleton } from "@/components/sections/PropertiesSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { getMeta, getProperties, getSiteData } from "@/lib/api";
+import type { SiteData } from "@/content/types";
 
 export default function Home() {
   return <Suspense fallback={<main className="bs-site bs-wrap" aria-live="polite">Loading the website…</main>}><HomeContent /></Suspense>;
 }
 
 async function HomeContent() {
-  const [site, latest, meta] = await Promise.all([getSiteData(), getProperties({}, 12), getMeta()]);
+  const site = await getSiteData();
   const { name, whatsapp, phoneLocal, phoneHref, nav, faq } = site;
   const contact = { name, whatsapp, phoneLocal, phoneHref };
-  /* .bs-site is the size container that drives the 768px and 1024px layouts. Each section has its own
-     Suspense boundary so React hydrates it as a separate task. The outer fallback can show while the
-     API wakes; the cached content streams in when it is ready. */
+  /* Site content is cached; live listings stream separately when the API wakes. */
   return (
     <div className="bs-site">
       <div className="bs-page">
         <Suspense><Navbar data={{ ...contact, nav }} /></Suspense>
         <main className="bs-home">
           <Suspense><HeroSection data={site} /></Suspense>
-          <Suspense><PropertiesSection list={latest} meta={meta} city={site.city} /></Suspense>
+          <Suspense fallback={<PropertiesSkeleton city={site.city} />}>
+            <HomeProperties site={site} />
+          </Suspense>
           <Suspense><InvestmentPlanSection site={site} /></Suspense>
           {site.stats.length > 0 && <Suspense><StatsBand data={site} /></Suspense>}
           <Suspense><AboutSection data={site} /></Suspense>
@@ -52,4 +53,9 @@ async function HomeContent() {
       </div>
     </div>
   );
+}
+
+async function HomeProperties({ site }: { site: SiteData }) {
+  const [latest, meta] = await Promise.all([getProperties({}, 12), getMeta()]);
+  return <PropertiesSection list={latest} meta={meta} city={site.city} />;
 }
